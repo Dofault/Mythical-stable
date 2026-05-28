@@ -2,6 +2,7 @@ README.md
 pyproject.toml
 mythical_stable/__init__.py
 mythical_stable/__main__.py
+mythical_stable/protocols.py
 mythical_stable.egg-info/PKG-INFO
 mythical_stable.egg-info/SOURCES.txt
 mythical_stable.egg-info/dependency_links.txt
