@@ -17,6 +17,19 @@ class DispatchCommand:
     def undo(self) -> None:
         self._service.recall(self._name)
 
+class RecallCommand:
+    def __init__(self, service: MissionService, name: str):
+        self._service     = service
+        self._name        = name
+        self._destination = destination
+        self._days        = days
+
+    def execute(self):
+        self._service.recall(self._name)
+
+    def undo(self):
+        self._service.dispatch(self._name)
+
 class CommandHistory:
     """Stack of executed commands. Supports single-level undo."""
 
