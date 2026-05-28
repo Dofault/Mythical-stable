@@ -161,31 +161,31 @@ class CapturingLogger:
 
 ### What you implement
 
-**`services/mission_service.py`**
-- `MissionService(stable, logger)` - dependency injection
-- `dispatch(creature_name, destination, duration_days, notes="")` → `MissionRecord`
-  - Creates a `MissionRecord`, calls `send_on_mission()`, calls `logger.log_departure()`
-  - Uses `mission_lock` context manager to prevent double-dispatch
-  - Raises `RuntimeError` if creature is already on a mission
-- `recall(creature_name)` - closes record, calls `return_to_stable()`, calls `logger.log_return()`
-  - Raises `KeyError` if creature has no active mission
-- `active_missions()` → `list[MissionRecord]`
-- `ScrollArchive` class context manager and `mission_lock` generator context manager
+**`services/mission_service.py`** ⚠️
+- `MissionService(stable, logger)` - dependency injection ❓
+- `dispatch(creature_name, destination, duration_days, notes="")` → `MissionRecord` ❓
+  - Creates a `MissionRecord`, calls `send_on_mission()`, calls `logger.log_departure()` ❓
+  - Uses `mission_lock` context manager to prevent double-dispatch ❓
+  - Raises `RuntimeError` if creature is already on a mission ❓
+- `recall(creature_name)` - closes record, calls `return_to_stable()`, calls `logger.log_return()` ❓
+  - Raises `KeyError` if creature has no active mission ❓
+- `active_missions()` → `list[MissionRecord]` ❓
+- `ScrollArchive` class context manager and `mission_lock` generator context manager ❓
 
-**`services/dispatcher.py`**
-- `MissionDispatcher(notifier)` - dependency injection
-- `dispatch(creature_name, destination)` - calls `self._notifier.notify()` with a formatted message
-- Does **not** send the creature on a mission - that is `MissionService`'s job
+**`services/dispatcher.py`** ✅
+- `MissionDispatcher(notifier)` - dependency injection ✅
+- `dispatch(creature_name, destination)` - calls `self._notifier.notify()` with a formatted message ✅
+- Does **not** send the creature on a mission - that is `MissionService`'s job ✅
 
-**`services/notifiers.py`**
-- `ScrollNotifier` - prints to console with a scroll prefix
-- `MirrorNotifier` - appends to `mirror_log.txt`
-- `SilentNotifier` - no-op, does nothing
-- `SilentLogger` - no-op logger for use in tests
-- `ConsoleMissionLogger` - prints departure and return notices
-- None of these inherit from the Protocol classes - structural typing only
+**`services/notifiers.py`** ⚠️
+- `ScrollNotifier` - prints to console with a scroll prefix ✅
+- `MirrorNotifier` - appends to `mirror_log.txt` ✅
+- `SilentNotifier` - no-op, does nothing ✅
+- `SilentLogger` - no-op logger for use in tests ❓
+- `ConsoleMissionLogger` - prints departure and return notices ❓
+- None of these inherit from the Protocol classes - structural typing only ❓
 
-**`services/__init__.py`**
+**`services/__init__.py`** ✅
 ```python
 from .mission_service import MissionService, ScrollArchive, mission_lock
 from .dispatcher import MissionDispatcher
