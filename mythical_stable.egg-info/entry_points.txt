@@ -1,2 +1,2 @@
 [console_scripts]
-mythical-stable = mythical_stable.__main__:run
+mythical-stable = mythical_stable.__main__:main
