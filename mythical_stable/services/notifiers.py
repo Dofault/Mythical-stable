@@ -13,3 +13,11 @@ class MirrorNotifier:
 class SilentNotifier:
     def notify(self, message: str) -> None:
         pass  # delivers nothing
+
+class SilentLogger:
+    def unknown1(self):
+        ...
+
+class ConsoleMissionLogger:
+    def unknown2(self):
+        ...
